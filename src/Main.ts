@@ -23,6 +23,7 @@ import * as OS from "os";
 import * as Path from "path";
 import * as FS from "fs";
 import * as ChildProcess from "child_process";
+import * as Net from "net";
 import { LanguageClient, LanguageClientOptions, StreamInfo } from "vscode-languageclient";
 
 export function activate(context: VSCode.ExtensionContext): void {
@@ -59,7 +60,38 @@ function onJavaAvailable(context: VSCode.ExtensionContext, java: string, version
             ]
         }
     };
+    function createServer(): Promise<StreamInfo> {
+        return serverConnect(8000);
+    }
+    let client = new LanguageClient('vscode-xowl-languages', 'xOWL Language Server', createServer, clientOptions);
+    let disposable = client.start();
+    context.subscriptions.push(disposable);
 }
+
+/**
+ * Creates a new LSP server
+ * @param java The java executable use use
+ * @return A promise for I/O streams
+ */
+function serverLaunchProcess(java: string): Promise<StreamInfo> {
+    return null;
+}
+
+/**
+ * Connects to a running server
+ * @param port The port on the server
+ * @return A promise for I/O streams
+ */
+function serverConnect(port: number): Promise<StreamInfo> {
+    return new Promise((resolve, reject) => {
+        let socket = Net.connect(port);
+        resolve({
+            writer: socket,
+            reader: socket
+        });
+    });
+}
+
 
 export function deactivate(): void {
 }
