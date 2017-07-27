@@ -1,26 +1,51 @@
 {
     "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "RDF - NTriples",
+    "name": "RDF (N-Triples)",
     "scopeName": "source.xowl-rdf-nt",
     "patterns": [
         {
-            "include": "#keywords"
+            "include": "#comments"
+        },
+        {
+            "include": "#uris"
+        },
+        {
+            "include": "#langtag"
         },
         {
             "include": "#strings"
         }
     ],
     "repository": {
-        "keywords": {
+        "comments": {
             "patterns": [
                 {
-                    "name": "keyword.control.xowl",
-                    "match": "\\b(if|while|for|return)\\b"
+                    "name": "comment.line.percentage",
+                    "match": "\\#.*$"
+                }
+            ]
+        },
+        "uris": {
+            "patterns": [
+                {
+                    "name": "entity.name.tag",
+                    "match": "<[^>]+>"
+                },
+                {
+                    "name": "entity.name.tag",
+                    "match": "\\b\\w+:\\w+\\b"
+                }
+            ]
+        },
+        "langtag": {
+            "patterns": [
+                {
+                    "name": "constant.numeric",
+                    "match": "\\@[a-zA-Z]+(\\-[a-zA-Z0-9]+)*"
                 }
             ]
         },
         "strings": {
-            "name": "string.quoted.double.xowl",
             "begin": "\"",
             "end": "\"",
             "patterns": [

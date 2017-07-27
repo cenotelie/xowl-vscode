@@ -1,0 +1,37 @@
+{
+    "iconDefinitions": {
+        "_file_xowl": {
+            "iconPath": "./xowl.svg"
+        }
+    },
+    "fileExtensions": {
+        "nt": "_file_xowl",
+        "nq": "_file_xowl",
+        "ttl": "_file_xowl",
+        "trig": "_file_xowl",
+        "rdf": "_file_xowl",
+        "xrdf": "_file_xowl",
+        "ofn": "_file_xowl",
+        "fs": "_file_xowl",
+        "owx": "_file_xowl",
+        "owl": "_file_xowl",
+        "xowl": "_file_xowl",
+        "sparql": "_file_xowl"
+    },
+    "light": {
+        "fileExtensions": {
+            "nt": "_file_xowl",
+            "nq": "_file_xowl",
+            "ttl": "_file_xowl",
+            "trig": "_file_xowl",
+            "rdf": "_file_xowl",
+            "xrdf": "_file_xowl",
+            "ofn": "_file_xowl",
+            "fs": "_file_xowl",
+            "owx": "_file_xowl",
+            "owl": "_file_xowl",
+            "xowl": "_file_xowl",
+            "sparql": "_file_xowl"
+        }
+    }
+}

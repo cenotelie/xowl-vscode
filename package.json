@@ -39,6 +39,98 @@
                     ".nt"
                 ],
                 "configuration": "./languages/rdf-nt-language-configuration.json"
+            },
+            {
+                "id": "xowl-rdf-nq",
+                "aliases": [
+                    "RDF (N-Quads)"
+                ],
+                "extensions": [
+                    ".nq"
+                ],
+                "configuration": "./languages/rdf-nq-language-configuration.json"
+            },
+            {
+                "id": "xowl-rdf-ttl",
+                "aliases": [
+                    "RDF (Turtle)"
+                ],
+                "extensions": [
+                    ".ttl"
+                ],
+                "configuration": "./languages/rdf-ttl-language-configuration.json"
+            },
+            {
+                "id": "xowl-rdf-trig",
+                "aliases": [
+                    "RDF (TriG)"
+                ],
+                "extensions": [
+                    ".trig"
+                ],
+                "configuration": "./languages/rdf-trig-language-configuration.json"
+            },
+            {
+                "id": "xowl-rdf-xml",
+                "aliases": [
+                    "RDF (XML)"
+                ],
+                "extensions": [
+                    ".rdf"
+                ],
+                "configuration": "./languages/rdf-xml-language-configuration.json"
+            },
+            {
+                "id": "xowl-xrdf",
+                "aliases": [
+                    "xRDF"
+                ],
+                "extensions": [
+                    ".xrdf"
+                ],
+                "configuration": "./languages/xrdf-language-configuration.json"
+            },
+            {
+                "id": "xowl-owl-fs",
+                "aliases": [
+                    "OWL (Functional)"
+                ],
+                "extensions": [
+                    ".ofn",
+                    ".fs"
+                ],
+                "configuration": "./languages/owl-fs-language-configuration.json"
+            },
+            {
+                "id": "xowl-owl-xml",
+                "aliases": [
+                    "OWL (XML)"
+                ],
+                "extensions": [
+                    ".owx",
+                    ".owl"
+                ],
+                "configuration": "./languages/owl-xml-language-configuration.json"
+            },
+            {
+                "id": "xowl-xowl",
+                "aliases": [
+                    "xOWL"
+                ],
+                "extensions": [
+                    ".xowl"
+                ],
+                "configuration": "./languages/xowl-language-configuration.json"
+            },
+            {
+                "id": "xowl-sparql",
+                "aliases": [
+                    "SPARQL"
+                ],
+                "extensions": [
+                    ".sparql"
+                ],
+                "configuration": "./languages/sparql-language-configuration.json"
             }
         ],
         "grammars": [
@@ -46,6 +138,13 @@
                 "language": "xowl-rdf-nt",
                 "scopeName": "source.xowl-rdf-nt",
                 "path": "./languages/rdf-nt.tmLanguage.json"
+            }
+        ],
+        "iconThemes": [
+            {
+                "id":"xowl-icons",
+                "label": "xOWL Icons",
+                "path": "./icons/xowl-icon-theme.json"
             }
         ]
     },
