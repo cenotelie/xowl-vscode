@@ -15,7 +15,7 @@
             "outFiles": [
                 "${workspaceRoot}/target/src"
             ],
-            "preLaunchTask": "tsc"
+            "preLaunchTask": "npm"
         }
     ]
 }

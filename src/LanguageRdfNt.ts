@@ -21,7 +21,7 @@ import * as VSCode from "vscode";
 import {LanguageClient, LanguageClientOptions, StreamInfo} from "vscode-languageclient";
 
 export function activate(context: VSCode.ExtensionContext) {
-    console.log('Main activation');
+    console.log('Activating Language extension');
 }
 
 export function deactivate() {
