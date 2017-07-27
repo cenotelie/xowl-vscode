@@ -24,15 +24,17 @@
         "semantic"
     ],
     "activationEvents": [
-        "onLanguage:xowlrdfnt"
+        "onLanguage:xowl-rdf-nt"
     ],
     "main": "./target/src/Main",
     "files": [],
     "contributes": {
         "languages": [
             {
-                "id": "xowlrdfnt",
-                "aliases": [],
+                "id": "xowl-rdf-nt",
+                "aliases": [
+                    "RDF (N-Triples)"
+                ],
                 "extensions": [
                     ".nt"
                 ],
@@ -41,7 +43,7 @@
         ],
         "grammars": [
             {
-                "language": "xowlrdfnt",
+                "language": "xowl-rdf-nt",
                 "scopeName": "source.xowl-rdf-nt",
                 "path": "./languages/rdf-nt.tmLanguage.json"
             }
