@@ -11,7 +11,7 @@
     },
     "license": "LGPLv3",
     "engines": {
-        "vscode": "^1.13.0"
+        "vscode": "^1.14.0"
     },
     "categories": [
         "Languages"
@@ -23,7 +23,9 @@
         "xowl",
         "semantic"
     ],
-    "main": "./target/src/Main",
+    "activationEvents": [
+        "onLanguage:xowl-rdf-nt"
+    ],
     "files": [],
     "contributes": {
         "languages": [
@@ -50,12 +52,11 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "dependencies": {
-        "portfinder": "^1.0.13",
         "vscode-languageclient": "3.2.2"
     },
     "devDependencies": {
-        "typescript": "^2.2.1",
-        "vscode": "^1.1.0",
+        "typescript": "^2.4.2",
+        "vscode": "^1.1.4",
         "@types/node": "^6.0.40",
         "@types/es6-promise": "^0.0.32"
     }
