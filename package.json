@@ -28,54 +28,19 @@
     "contributes": {
         "languages": [
             {
-                "id": "rdf",
-                "aliases": [
-                    "RDF"
-                ],
+                "id": "xowl-rdf-nt",
+                "aliases": [],
                 "extensions": [
-                    ".nt",
-                    ".nq",
-                    ".ttl",
-                    ".rdf",
-                    ".jsonld",
-                    ".trig",
-                    ".xrdf",
-                    ".ofn",
-                    ".fs",
-                    ".owx",
-                    ".owl",
-                    ".xowl"
+                    ".nt"
                 ],
-                "configuration": "./language-configuration.json"
-            },
-            {
-                "id": "xowl",
-                "aliases": [
-                    "xOWL",
-                    "xowl"
-                ],
-                "extensions": [
-                    ".nt",
-                    ".nq",
-                    ".ttl",
-                    ".rdf",
-                    ".jsonld",
-                    ".trig",
-                    ".xrdf",
-                    ".ofn",
-                    ".fs",
-                    ".owx",
-                    ".owl",
-                    ".xowl"
-                ],
-                "configuration": "./language-configuration.json"
+                "configuration": "./languages/rdf-nt.json"
             }
         ],
         "grammars": [
             {
-                "language": "xowl",
-                "scopeName": "source.xowl",
-                "path": "./syntaxes/xowl.tmLanguage.json"
+                "language": "xowl-rdf-nt",
+                "scopeName": "source.xowl-rdf-nt",
+                "path": "./languages/rdf-nt.tmLanguage.json"
             }
         ]
     },
