@@ -24,7 +24,16 @@
         "semantic"
     ],
     "activationEvents": [
-        "onLanguage:rdf-nt"
+        "onLanguage:rdf-nt",
+        "onLanguage:rdf-nq",
+        "onLanguage:rdf-ttl",
+        "onLanguage:rdf-trig",
+        "onLanguage:rdf-xml",
+        "onLanguage:xrdf",
+        "onLanguage:owl-fs",
+        "onLanguage:owl-xml",
+        "onLanguage:xowl",
+        "onLanguage:sparql"
     ],
     "main": "./target/src/Main",
     "files": [],
@@ -150,7 +159,7 @@
                 ]
             },
             {
-                "id": "xowl-sparql",
+                "id": "sparql",
                 "aliases": [
                     "SPARQL"
                 ],

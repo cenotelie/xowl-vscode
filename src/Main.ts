@@ -51,10 +51,21 @@ export function activate(context: VSCode.ExtensionContext): void {
 function onJavaAvailable(context: VSCode.ExtensionContext, java: string, version: string): void {
     console.info("vscode-xowl-languages: Will use Java: " + java + " (version " + version + ")");
     let clientOptions: LanguageClientOptions = {
-        documentSelector: ["rdf-nt"],
+        documentSelector: ["rdf-nt", "rdf-nq", "rdf-ttl", "rdf-trig", "rdf-xml", "xrdf", "owl-fs", "owl-xml", "xowl", "sparql"],
         synchronize: {
             fileEvents: [
-                VSCode.workspace.createFileSystemWatcher("**/*.nt")
+                VSCode.workspace.createFileSystemWatcher("**/*.nt"),
+                VSCode.workspace.createFileSystemWatcher("**/*.nq"),
+                VSCode.workspace.createFileSystemWatcher("**/*.ttl"),
+                VSCode.workspace.createFileSystemWatcher("**/*.trig"),
+                VSCode.workspace.createFileSystemWatcher("**/*.rdf"),
+                VSCode.workspace.createFileSystemWatcher("**/*.xrdf"),
+                VSCode.workspace.createFileSystemWatcher("**/*.ofn"),
+                VSCode.workspace.createFileSystemWatcher("**/*.fs"),
+                VSCode.workspace.createFileSystemWatcher("**/*.owl"),
+                VSCode.workspace.createFileSystemWatcher("**/*.owx"),
+                VSCode.workspace.createFileSystemWatcher("**/*.xowl"),
+                VSCode.workspace.createFileSystemWatcher("**/*.sparql")
             ]
         }
     };
