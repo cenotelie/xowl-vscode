@@ -14,6 +14,9 @@
         },
         {
             "include": "#strings"
+        },
+        {
+            "include": "#keywords"
         }
     ],
     "repository": {
@@ -52,6 +55,14 @@
                 {
                     "name": "constant.character.escape.xowl",
                     "match": "\\\\."
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name":"keyword.control",
+                    "match": "\\b([Pp][Rr][Ee][Ff][Ii][Xx]|[Bb][Aa])\\b"
                 }
             ]
         }

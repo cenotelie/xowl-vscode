@@ -31,67 +31,85 @@
     "contributes": {
         "languages": [
             {
-                "id": "xowl-rdf-nt",
+                "id": "rdf-nt",
                 "aliases": [
                     "RDF (N-Triples)"
                 ],
                 "extensions": [
                     ".nt"
                 ],
-                "configuration": "./languages/rdf-nt-language-configuration.json"
+                "configuration": "./languages/rdf-nt-language-configuration.json",
+                "mimetypes": [
+                    "application/n-triples"
+                ]
             },
             {
-                "id": "xowl-rdf-nq",
+                "id": "rdf-nq",
                 "aliases": [
                     "RDF (N-Quads)"
                 ],
                 "extensions": [
                     ".nq"
                 ],
-                "configuration": "./languages/rdf-nq-language-configuration.json"
+                "configuration": "./languages/rdf-nt-language-configuration.json",
+                "mimetypes": [
+                    "application/n-quads"
+                ]
             },
             {
-                "id": "xowl-rdf-ttl",
+                "id": "rdf-ttl",
                 "aliases": [
                     "RDF (Turtle)"
                 ],
                 "extensions": [
                     ".ttl"
                 ],
-                "configuration": "./languages/rdf-ttl-language-configuration.json"
+                "configuration": "./languages/rdf-ttl-language-configuration.json",
+                "mimetypes": [
+                    "text/turtle"
+                ]
             },
             {
-                "id": "xowl-rdf-trig",
+                "id": "rdf-trig",
                 "aliases": [
                     "RDF (TriG)"
                 ],
                 "extensions": [
                     ".trig"
                 ],
-                "configuration": "./languages/rdf-trig-language-configuration.json"
+                "configuration": "./languages/rdf-trig-language-configuration.json",
+                "mimetypes": [
+                    "application/trig"
+                ]
             },
             {
-                "id": "xowl-rdf-xml",
+                "id": "rdf-xml",
                 "aliases": [
                     "RDF (XML)"
                 ],
                 "extensions": [
                     ".rdf"
                 ],
-                "configuration": "./languages/rdf-xml-language-configuration.json"
+                "configuration": "./languages/rdf-xml-language-configuration.json",
+                "mimetypes": [
+                    "application/rdf+xml"
+                ]
             },
             {
-                "id": "xowl-xrdf",
+                "id": "xrdf",
                 "aliases": [
                     "xRDF"
                 ],
                 "extensions": [
                     ".xrdf"
                 ],
-                "configuration": "./languages/xrdf-language-configuration.json"
+                "configuration": "./languages/xrdf-language-configuration.json",
+                "mimetypes": [
+                    "application/x-xowl-xrdf"
+                ]
             },
             {
-                "id": "xowl-owl-fs",
+                "id": "owl-fs",
                 "aliases": [
                     "OWL (Functional)"
                 ],
@@ -99,10 +117,13 @@
                     ".ofn",
                     ".fs"
                 ],
-                "configuration": "./languages/owl-fs-language-configuration.json"
+                "configuration": "./languages/owl-fs-language-configuration.json",
+                "mimetypes": [
+                    "text/owl-functional"
+                ]
             },
             {
-                "id": "xowl-owl-xml",
+                "id": "owl-xml",
                 "aliases": [
                     "OWL (XML)"
                 ],
@@ -110,17 +131,23 @@
                     ".owx",
                     ".owl"
                 ],
-                "configuration": "./languages/owl-xml-language-configuration.json"
+                "configuration": "./languages/owl-xml-language-configuration.json",
+                "mimetypes": [
+                    "application/owl+xml"
+                ]
             },
             {
-                "id": "xowl-xowl",
+                "id": "xowl",
                 "aliases": [
                     "xOWL"
                 ],
                 "extensions": [
                     ".xowl"
                 ],
-                "configuration": "./languages/xowl-language-configuration.json"
+                "configuration": "./languages/xowl-language-configuration.json",
+                "mimetypes": [
+                    "application/x-xowl-xowl"
+                ]
             },
             {
                 "id": "xowl-sparql",
@@ -130,19 +157,28 @@
                 "extensions": [
                     ".sparql"
                 ],
-                "configuration": "./languages/sparql-language-configuration.json"
+                "configuration": "./languages/sparql-language-configuration.json",
+                "mimetypes": [
+                    "application/sparql-query",
+                    "application/sparql-update"
+                ]
             }
         ],
         "grammars": [
             {
-                "language": "xowl-rdf-nt",
-                "scopeName": "source.xowl-rdf-nt",
+                "language": "rdf-nt",
+                "scopeName": "source.rdf-nt",
+                "path": "./languages/rdf-nt.tmLanguage.json"
+            },
+            {
+                "language": "rdf-nq",
+                "scopeName": "source.rdf-nt",
                 "path": "./languages/rdf-nt.tmLanguage.json"
             }
         ],
         "iconThemes": [
             {
-                "id":"xowl-icons",
+                "id": "xowl-icons",
                 "label": "xOWL Icons",
                 "path": "./icons/xowl-icon-theme.json"
             }
