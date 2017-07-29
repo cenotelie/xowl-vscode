@@ -140,7 +140,7 @@
                     ".owx",
                     ".owl"
                 ],
-                "configuration": "./languages/owl-xml-language-configuration.json",
+                "configuration": "./languages/rdf-xml-language-configuration.json",
                 "mimetypes": [
                     "application/owl+xml"
                 ]
@@ -193,6 +193,16 @@
                 "language": "rdf-trig",
                 "scopeName": "source.rdf-trig",
                 "path": "./languages/rdf-trig.tmLanguage.json"
+            },
+            {
+                "language": "rdf-xml",
+                "scopeName": "source.rdf-xml",
+                "path": "./languages/rdf-xml.tmLanguage.json"
+            },
+            {
+                "language": "owl-xml",
+                "scopeName": "source.rdf-xml",
+                "path": "./languages/rdf-xml.tmLanguage.json"
             }
         ],
         "iconThemes": [
