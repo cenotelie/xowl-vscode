@@ -183,6 +183,11 @@
                 "language": "rdf-nq",
                 "scopeName": "source.rdf-nt",
                 "path": "./languages/rdf-nt.tmLanguage.json"
+            },
+            {
+                "language": "rdf-ttl",
+                "scopeName": "source.rdf-ttl",
+                "path": "./languages/rdf-ttl.tmLanguage.json"
             }
         ],
         "iconThemes": [

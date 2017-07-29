@@ -46,12 +46,10 @@
             ]
         },
         "strings": {
-            "begin": "\"",
-            "end": "\"",
             "patterns": [
                 {
-                    "name": "constant.character.escape.xowl",
-                    "match": "\\\\."
+                    "name": "string.quoted.double",
+                    "match": "\"([^\\\"]|\\\\|\\\")*\""
                 }
             ]
         }
