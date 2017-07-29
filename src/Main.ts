@@ -17,7 +17,6 @@
 * If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
 
-import { setup } from "./Languages";
 import * as VSCode from "vscode";
 import * as OS from "os";
 import * as Path from "path";
@@ -27,7 +26,6 @@ import * as Net from "net";
 import { LanguageClient, LanguageClientOptions, StreamInfo } from "vscode-languageclient";
 
 export function activate(context: VSCode.ExtensionContext): void {
-    setup(context);
     let java = resolveJava();
     if (java == null) {
         console.error("vscode-xowl-languages: Failed to find Java executable");
