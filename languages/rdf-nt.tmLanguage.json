@@ -30,10 +30,6 @@
                 {
                     "name": "entity.name.tag",
                     "match": "<[^>]+>"
-                },
-                {
-                    "name": "entity.name.tag",
-                    "match": "\\b\\w+:\\w+\\b"
                 }
             ]
         },

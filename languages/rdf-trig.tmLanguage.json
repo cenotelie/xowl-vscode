@@ -1,7 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "RDF (Turtle)",
-    "scopeName": "source.rdf-ttl",
+    "name": "RDF (TriG)",
+    "scopeName": "source.rdf-trig",
     "patterns": [
         {
             "include": "#comments"
@@ -94,7 +94,7 @@
             "patterns": [
                 {
                     "name": "keyword.control",
-                    "match": "\\b(?i:@?prefix|@?base|a|true|false)\\b"
+                    "match": "\\b(?i:@?prefix|@?base|graph|a|true|false)\\b"
                 }
             ]
         }

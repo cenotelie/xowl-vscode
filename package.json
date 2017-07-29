@@ -188,6 +188,11 @@
                 "language": "rdf-ttl",
                 "scopeName": "source.rdf-ttl",
                 "path": "./languages/rdf-ttl.tmLanguage.json"
+            },
+            {
+                "language": "rdf-trig",
+                "scopeName": "source.rdf-trig",
+                "path": "./languages/rdf-trig.tmLanguage.json"
             }
         ],
         "iconThemes": [
