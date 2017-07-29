@@ -24,7 +24,7 @@
         "semantic"
     ],
     "activationEvents": [
-        "onLanguage:xowl-rdf-nt"
+        "onLanguage:rdf-nt"
     ],
     "main": "./target/src/Main",
     "files": [],

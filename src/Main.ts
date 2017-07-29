@@ -51,7 +51,7 @@ export function activate(context: VSCode.ExtensionContext): void {
 function onJavaAvailable(context: VSCode.ExtensionContext, java: string, version: string): void {
     console.info("vscode-xowl-languages: Will use Java: " + java + " (version " + version + ")");
     let clientOptions: LanguageClientOptions = {
-        documentSelector: ["xowl-rdf-nt"],
+        documentSelector: ["rdf-nt"],
         synchronize: {
             fileEvents: [
                 VSCode.workspace.createFileSystemWatcher("**/*.nt")
