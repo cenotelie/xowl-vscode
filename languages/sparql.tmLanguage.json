@@ -1,7 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "RDF (TriG)",
-    "scopeName": "source.rdf-trig",
+    "name": "SPARQL",
+    "scopeName": "source.sparql",
     "patterns": [
         {
             "include": "#comments"
@@ -23,6 +23,9 @@
         },
         {
             "include": "#keywords"
+        },
+        {
+            "include": "#identifiers"
         }
     ],
     "repository": {
@@ -95,6 +98,18 @@
                 {
                     "name": "keyword.control",
                     "match": "\\b(?i:@?prefix|@?base|graph|a|true|false)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(?i:select|distinct|reduced|as|construct|where|describe|ask|from|named|group|by|having|order|asc|desc|limit|offset|values|silent|to|into|load|clear|drop|create|add|move|copy|insert|delete|with|data|using|default|all|optional|service|bind|union|minus|filter|undef|in|not|exists|separator)\\b"
+                }
+            ]
+        },
+        "identifiers": {
+            "patterns": [
+                {
+                    "name":"variable.name",
+                    "match": "\\?[_a-zA-Z][_a-zA-Z0-9]*"
                 }
             ]
         }

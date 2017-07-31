@@ -1,0 +1,141 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "xOWL",
+    "scopeName": "source.xowl",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#uris"
+        },
+        {
+            "include": "#langtag"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#numerics"
+        },
+        {
+            "include": "#langtag"
+        },
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#identifiers"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.percentage",
+                    "match": "\\#.*$"
+                }
+            ]
+        },
+        "uris": {
+            "patterns": [
+                {
+                    "name": "entity.name.tag",
+                    "match": "<[^>]+>"
+                },
+                {
+                    "name": "entity.name.tag",
+                    "match": "[a-zA-Z0-9\\._]*:[a-zA-Z0-9\\._:\\-]+"
+                }
+            ]
+        },
+        "langtag": {
+            "patterns": [
+                {
+                    "name": "constant.numeric",
+                    "match": "\\@[a-zA-Z]+(\\-[a-zA-Z0-9]+)*"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.double",
+                    "match": "\"([^\\\"]|\\\\|\\\")*\""
+                }
+            ]
+        },
+        "numerics": {
+            "patterns": [
+                {
+                    "name": "constant.numeric",
+                    "match": "[0-9]+"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(Prefix|Import|Ontology|Annotation)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(Declaration|Class|Datatype|ObjectProperty|DataProperty|AnnotationProperty|NamedIndividual)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(ObjectPropertyChain|ObjectInverseOf)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(DataIntersectionOf|DataUnionOf|DataComplementOf|DataOneOf|DatatypeRestriction)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(ObjectIntersectionOf|ObjectUnionOf|ObjectComplementOf|ObjectOneOf|ObjectSomeValuesFrom|ObjectAllValuesFrom|ObjectHasValue|ObjectHasSelf|ObjectMinCardinality|ObjectMaxCardinality|ObjectExactCardinality)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(DataSomeValuesFrom|DataAllValuesFrom|DataHasValue|DataMinCardinality|DataMaxCardinality|DataExactCardinality)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(SubClassOf|EquivalentClasses|DisjointClasses|DisjointUnion)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(SubObjectPropertyOf|EquivalentObjectProperties|DisjointObjectProperties|InverseObjectProperties|ObjectPropertyDomain|ObjectPropertyRange|FunctionalObjectProperty|InverseFunctionalObjectProperty|ReflexiveObjectProperty|IrreflexiveObjectProperty|SymmetricObjectProperty|AsymmetricObjectProperty|TransitiveObjectProperty)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(SubDataPropertyOf|EquivalentDataProperties|DisjointDataProperties|DataPropertyDomain|DataPropertyRange|FunctionalDataProperty)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(DatatypeDefinition|HasKey)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(SameIndividual|DifferentIndividuals|ClassAssertion|ObjectPropertyAssertion|NegativeObjectPropertyAssertion|DataPropertyAssertion|NegativeDataPropertyAssertion)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(AnnotationAssertion|SubAnnotationPropertyOf|AnnotationPropertyDomain|AnnotationPropertyRange)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(FunctionDefinition|Rule|Antecedents|Consequents|Guard|Meta|Not)\\b"
+                }
+            ]
+        },
+        "identifiers": {
+            "patterns": [
+                {
+                    "name":"variable.name",
+                    "match": "\\?[_a-zA-Z][_a-zA-Z0-9]*"
+                }
+            ]
+        }
+    }
+}

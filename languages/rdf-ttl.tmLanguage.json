@@ -42,7 +42,7 @@
                 },
                 {
                     "name": "entity.name.tag",
-                    "match": "[a-zA-Z0-9\\._]*:[a-zA-Z0-9\\._:]+"
+                    "match": "[a-zA-Z0-9\\._]*:[a-zA-Z0-9\\._:\\-]+"
                 }
             ]
         },

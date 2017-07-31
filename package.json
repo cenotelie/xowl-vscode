@@ -200,9 +200,29 @@
                 "path": "./languages/rdf-xml.tmLanguage.json"
             },
             {
+                "language": "xrdf",
+                "scopeName": "source.xrdf",
+                "path": "./languages/xrdf.tmLanguage.json"
+            },
+            {
+                "language": "owl-fs",
+                "scopeName": "source.owl-fs",
+                "path": "./languages/owl-fs.tmLanguage.json"
+            },
+            {
                 "language": "owl-xml",
                 "scopeName": "source.rdf-xml",
                 "path": "./languages/rdf-xml.tmLanguage.json"
+            },
+            {
+                "language": "xowl",
+                "scopeName": "source.xowl",
+                "path": "./languages/xowl.tmLanguage.json"
+            },
+            {
+                "language": "sparql",
+                "scopeName": "source.sparql",
+                "path": "./languages/sparql.tmLanguage.json"
             }
         ],
         "iconThemes": [
