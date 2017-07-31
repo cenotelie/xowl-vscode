@@ -63,7 +63,8 @@ function onJavaAvailable(context: VSCode.ExtensionContext, java: string, version
                 VSCode.workspace.createFileSystemWatcher("**/*.owl"),
                 VSCode.workspace.createFileSystemWatcher("**/*.owx"),
                 VSCode.workspace.createFileSystemWatcher("**/*.xowl"),
-                VSCode.workspace.createFileSystemWatcher("**/*.sparql")
+                VSCode.workspace.createFileSystemWatcher("**/*.sparql"),
+                VSCode.workspace.createFileSystemWatcher("**/*.denotation")
             ]
         }
     };
