@@ -1,7 +1,7 @@
 {
     "name": "vscode-xowl-languages",
     "displayName": "xOWL Languages Support",
-    "description": "Language support for the RDF, OWL and xOWL languages",
+    "description": "Language support for the RDF, OWL, xRDF, xOWL, SPARQL and Denotation languages",
     "icon": "xowl.png",
     "version": "0.0.1",
     "publisher": "cenotelie",
