@@ -1,0 +1,94 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Denotation",
+    "scopeName": "source.denotation",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#uris"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#numerics"
+        },
+        {
+            "include": "#langtag"
+        },
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#identifiers"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.percentage",
+                    "match": "\\#.*$"
+                }
+            ]
+        },
+        "uris": {
+            "patterns": [
+                {
+                    "name": "entity.name.tag",
+                    "match": "<[^>]+>"
+                },
+                {
+                    "name": "entity.name.tag",
+                    "match": "[a-zA-Z0-9\\._]*:[a-zA-Z0-9\\._:\\-]+"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.double",
+                    "match": "\"([^\\\"]|\\\\|\\\")*\""
+                },
+                {
+                    "name": "string.quoted.single",
+                    "match": "'([^\\']|\\\\|\\')*'"
+                }
+            ]
+        },
+        "numerics": {
+            "patterns": [
+                {
+                    "name": "constant.numeric",
+                    "match": "[0-9]+"
+                },
+                {
+                    "name": "constant.numeric",
+                    "match": "[0-9]*\\.[0-9]+"
+                },
+                {
+                    "name": "constant.numeric",
+                    "match": "([0-9]+\\.[0-9]*[eE](\\+|\\-)?[0-9]+|\\.[0-9]+[eE](\\+|\\-)?[0-9]+|[0-9]+[eE](\\+|\\-)?[0-9]+)"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(?i:prefix|base|true|false|rule|is|sign|seme|and|with|relation|bound|bind|to|a|id|as)\\b"
+                }
+            ]
+        },
+        "identifiers": {
+            "patterns": [
+                {
+                    "name":"variable.name",
+                    "match": "\\?[_a-zA-Z][_a-zA-Z0-9]*"
+                }
+            ]
+        }
+    }
+}

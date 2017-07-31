@@ -33,7 +33,8 @@
         "onLanguage:owl-fs",
         "onLanguage:owl-xml",
         "onLanguage:xowl",
-        "onLanguage:sparql"
+        "onLanguage:sparql",
+        "onLanguage:denotation"
     ],
     "main": "./target/src/Main",
     "files": [],
@@ -171,6 +172,16 @@
                     "application/sparql-query",
                     "application/sparql-update"
                 ]
+            },
+            {
+                "id": "denotation",
+                "aliases": [
+                    "Denotation"
+                ],
+                "extensions": [
+                    ".denotation"
+                ],
+                "configuration": "./languages/denotation-language-configuration.json"
             }
         ],
         "grammars": [
@@ -223,6 +234,11 @@
                 "language": "sparql",
                 "scopeName": "source.sparql",
                 "path": "./languages/sparql.tmLanguage.json"
+            },
+            {
+                "language": "denotation",
+                "scopeName": "source.denotation",
+                "path": "./languages/denotation.tmLanguage.json"
             }
         ]
     },
