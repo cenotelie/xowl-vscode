@@ -224,13 +224,6 @@
                 "scopeName": "source.sparql",
                 "path": "./languages/sparql.tmLanguage.json"
             }
-        ],
-        "iconThemes": [
-            {
-                "id": "xowl-icons",
-                "label": "xOWL Icons",
-                "path": "./icons/xowl-icon-theme.json"
-            }
         ]
     },
     "scripts": {
