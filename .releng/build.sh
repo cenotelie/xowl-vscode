@@ -8,11 +8,15 @@ VERSION=$(grep "version" "$ROOT/package.json" | grep -o -E "([[:digit:]]+\\.[[:d
 HASH=$(hg -R "$ROOT" --debug id -i)
 
 SERVER_VERSION="2.1.0-SNAPSHOT"
+SERVER_FILE="$HOME/.m2/repository/org/xowl/infra/xowl-lsp-server-xowl/$SERVER_VERSION/xowl-lsp-server-xowl-$SERVER_VERSION-jar-with-dependencies.jar"
+
+
+# Prepare outputs
 
 rm -rf "$ROOT/target"
 mkdir "$ROOT/target"
-
-SERVER_FILE="$HOME/.m2/repository/org/xowl/infra/xowl-lsp-server-xowl/$SERVER_VERSION/xowl-lsp-server-xowl-$SERVER_VERSION-jar-with-dependencies.jar"
+# Inject commit hash into package.json
+sed -i "s/\"commit\": \".*\"/\"commit\": \"$HASH\"/" "$ROOT/package.json"
 
 if [ -r "$SERVER_FILE" ]; then
     cp "$SERVER_FILE" "$ROOT/target/server.jar"
@@ -30,3 +34,7 @@ pushd "$ROOT"
 vsce package
 
 popd
+
+# cleanup
+rm -rf "$ROOT/target"
+hg -R "$ROOT" revert -C package.json
