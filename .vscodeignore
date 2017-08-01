@@ -1,29 +1,14 @@
-# IDE configs
+# VS Code
 .vscode/**
-.idea/**
-*.iml
-javaconfig.json
-classpath.txt
+
+# Mercurial
+.hgignore
+.hg/**
+
+# Typescripts source files and target maps
 tsconfig.json
-tsd.json
-*.xml
+**/*.ts
+**/*.js.map
 
-# Logs
-*.log*
-
-# Sources
-src/**
-test/**
-lib/**
-!lib/javaconfig.schema.json
-repo/**
-scripts/**
-
-# Compiler output
-out/test/**
-target/**
-!target/fat-jar.jar
-
-# Extensions
-.gitignore
-**/*.map
+# Node modules
+node_modules/**
