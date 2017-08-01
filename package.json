@@ -4,6 +4,7 @@
     "description": "Language support for the RDF, OWL, xRDF, xOWL, SPARQL and Denotation languages",
     "icon": "xowl.png",
     "version": "0.1.0",
+    "commit": "",
     "publisher": "cenotelie",
     "repository": {
         "type": "mercurial",

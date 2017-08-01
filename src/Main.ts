@@ -82,6 +82,7 @@ function onJavaAvailable(context: VSCode.ExtensionContext, java: string, version
  * @return A promise for I/O streams
  */
 function serverLaunchProcess(java: string): Promise<StreamInfo> {
+    
     return null;
 }
 
