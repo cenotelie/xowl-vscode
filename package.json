@@ -1,15 +1,20 @@
 {
     "name": "vscode-xowl-languages",
-    "displayName": "xOWL Languages Support",
+    "displayName": "Semantic Web Languages Support",
     "description": "Language support for the RDF, OWL, xRDF, xOWL, SPARQL and Denotation languages",
     "icon": "xowl.png",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "publisher": "cenotelie",
     "repository": {
         "type": "mercurial",
         "url": "https://bitbucket.org/xowl/xowl-vscode"
     },
     "license": "LGPL-3.0+",
+    "homepage": "https://bitbucket.org/xowl/xowl/vs-code",
+    "bugs": {
+        "url": "https://bitbucket.org/xowl/xowl/vs-code/issues",
+        "email": "contact@cenotelie.fr"
+    },
     "engines": {
         "vscode": "^1.14.0"
     },
@@ -20,7 +25,10 @@
         "language",
         "rdf",
         "owl",
+        "sparql",
         "xowl",
+        "xrdf",
+        "denotation",
         "semantic"
     ],
     "activationEvents": [
