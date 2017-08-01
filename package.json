@@ -23,13 +23,9 @@
         "Languages"
     ],
     "keywords": [
-        "language",
         "rdf",
         "owl",
         "sparql",
-        "xowl",
-        "xrdf",
-        "denotation",
         "semantic"
     ],
     "activationEvents": [

@@ -12,10 +12,17 @@ SERVER_VERSION="2.1.0-SNAPSHOT"
 rm -rf "$ROOT/target"
 mkdir "$ROOT/target"
 
-if [ -f "~/.m2/repository/org/xowl/infra/xowl-lsp-server-xowl/$SERVER_VERSION/xowl-lsp-server-xowl-$SERVER_VERSION-jar-with-dependencies.jar" ]; then
-    cp "~/.m2/repository/org/xowl/infra/xowl-lsp-server-xowl/$SERVER_VERSION/xowl-lsp-server-xowl-$SERVER_VERSION-jar-with-dependencies.jar" "$ROOT/target/server.jar"
+SERVER_FILE="$HOME/.m2/repository/org/xowl/infra/xowl-lsp-server-xowl/$SERVER_VERSION/xowl-lsp-server-xowl-$SERVER_VERSION-jar-with-dependencies.jar"
+
+if [ -r "$SERVER_FILE" ]; then
+    cp "$SERVER_FILE" "$ROOT/target/server.jar"
 else
-    
+    echo "Cannot find local build of the server, will try from maven.org"
+    curl -o "$ROOT/target/server.jar" "https://repo1.maven.org/maven2/org/xowl/infra/xowl-lsp-server-xowl/$SERVER_VERSION/xowl-lsp-server-xowl-$SERVER_VERSION-jar-with-dependencies.jar"
+    if [ ! -f "$ROOT/target/server.jar" ]; then
+        echo "Failed to download from maven.org"
+        exit 1
+    fi
 fi
 
 pushd "$ROOT"
