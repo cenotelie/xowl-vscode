@@ -69,7 +69,7 @@ function onJavaAvailable(context: VSCode.ExtensionContext, java: string, version
         }
     };
     function createServer(): Promise<StreamInfo> {
-        return serverConnect(8000);
+        return serverLaunchProcess(context, java);
     }
     let client = new LanguageClient('vscode-xowl-languages', 'xOWL Language Server', createServer, clientOptions);
     let disposable = client.start();
@@ -78,12 +78,16 @@ function onJavaAvailable(context: VSCode.ExtensionContext, java: string, version
 
 /**
  * Creates a new LSP server
- * @param java The java executable use use
+ * @param context The current context
+ * @param java    The java executable use use
  * @return A promise for I/O streams
  */
-function serverLaunchProcess(java: string): Promise<StreamInfo> {
-    
-    return null;
+function serverLaunchProcess(context: VSCode.ExtensionContext, java: string): Promise<StreamInfo> {
+    let jarPath = Path.resolve(context.extensionPath, "target", "server.jar");
+    let options = { cwd: VSCode.workspace.rootPath };
+    let process = ChildProcess.spawn(java, ["-jar", jarPath], options);
+    console.info("vscode-xowl-languages: Launched server as process " + process.pid);
+    return serverConnect(8000);
 }
 
 /**

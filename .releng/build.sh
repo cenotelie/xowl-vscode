@@ -12,11 +12,8 @@ SERVER_FILE="$HOME/.m2/repository/org/xowl/infra/xowl-lsp-server-xowl/$SERVER_VE
 
 
 # Prepare outputs
-
 rm -rf "$ROOT/target"
 mkdir "$ROOT/target"
-# Inject commit hash into package.json
-sed -i "s/\"commit\": \".*\"/\"commit\": \"$HASH\"/" "$ROOT/package.json"
 
 if [ -r "$SERVER_FILE" ]; then
     cp "$SERVER_FILE" "$ROOT/target/server.jar"
@@ -28,6 +25,9 @@ else
         exit 1
     fi
 fi
+
+# Inject commit hash into package.json
+sed -i "s/\"commit\": \".*\"/\"commit\": \"$HASH\"/" "$ROOT/package.json"
 
 pushd "$ROOT"
 
