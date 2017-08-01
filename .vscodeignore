@@ -5,6 +5,9 @@
 .hgignore
 .hg/**
 
+# Ignore the release engineering artifacts
+.releng/**
+
 # Typescripts source files and target maps
 tsconfig.json
 **/*.ts
