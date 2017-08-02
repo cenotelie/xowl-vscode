@@ -80,16 +80,17 @@ function doCreateServer(context: VSCode.ExtensionContext, client: LanguageClient
         }
         resolveJavaGetVersion(java).then(version => {
             client.outputChannel.appendLine("[INFO] Will use Java: " + java + " (version " + version + ")");
-            let streamInfo = serverLaunchProcess(context, java, client.outputChannel);
-            if (streamInfo == null) {
-                reject("No stream to server");
-                return;
-            }
-            resolve(streamInfo);
+            serverLaunchProcess(context, java, client.outputChannel).then(stream => {
+                resolve(stream);
+            }, message => {
+                reject(message);
+            }).catch(error => {
+                reject("[ERROR] " + error);
+            });
         }, message => {
-            reject("[ERROR] " + message);
+            reject(message);
         }).catch(error => {
-            reject(error);
+            reject("[ERROR] " + error);
         });
     });
 }
@@ -101,27 +102,30 @@ function doCreateServer(context: VSCode.ExtensionContext, client: LanguageClient
  * @param channel The channel to use for output
  * @return The stream to communicate with the server
  */
-function serverLaunchProcess(context: VSCode.ExtensionContext, java: string, channel: VSCode.OutputChannel): StreamInfo {
-    let jarPath = Path.resolve(context.extensionPath, "target", "server.jar");
-    let options = { cwd: VSCode.workspace.rootPath };
-    channel.appendLine("[INFO] Launching server as " + java + " -jar " + jarPath);
-    let process = ChildProcess.spawn(java, ["-jar", jarPath], options);
-    if (process == null) {
-        channel.appendLine("[ERROR] Failed to launch the server");
-        return null;
-    }
-    channel.appendLine("[INFO] Launched server as process " + process.pid);
-    serverAttachStream(process.stdout, channel);
-    serverAttachStream(process.stderr, channel);
-    let socket = Net.connect(8000);
-    if (socket == null) {
-        channel.appendLine("[ERROR] Failed to connect to the server. Is the process launched?");
-        return null;
-    }
-    return {
-        writer: socket,
-        reader: socket
-    };
+function serverLaunchProcess(context: VSCode.ExtensionContext, java: string, channel: VSCode.OutputChannel): Promise<StreamInfo> {
+    return new Promise((resolve, reject) => {
+        let jarPath = Path.resolve(context.extensionPath, "target", "server.jar");
+        let options = { cwd: VSCode.workspace.rootPath };
+        channel.appendLine("[INFO] Launching server as " + java + " -jar " + jarPath);
+        let process = ChildProcess.spawn(java, ["-jar", jarPath], options);
+        if (process == null) {
+            reject("[ERROR] Failed to launch the server");
+            return;
+        }
+        channel.appendLine("[INFO] Launched server as process " + process.pid);
+        serverAttachStream(process.stdout, channel);
+        serverAttachStream(process.stderr, channel);
+        try {
+            let socket = Net.connect(8000, "localhost", () => {
+                resolve({
+                    writer: socket,
+                    reader: socket
+                });
+            });
+        } catch (exception) {
+            reject("[ERROR] " + exception);
+        }
+    });
 }
 
 /**
