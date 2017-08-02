@@ -54,12 +54,12 @@ function createLanguageClient(context: VSCode.ExtensionContext): LanguageClient 
                 VSCode.workspace.createFileSystemWatcher("**/*.sparql"),
                 VSCode.workspace.createFileSystemWatcher("**/*.denotation")
             ]
-        }, outputChannelName: "vscode-xowl-languages"
+        }, outputChannelName: "xowl-languages"
     };
     function createServer(): Promise<StreamInfo> {
         return serverLaunchProcess(context, client);
     }
-    let client = new LanguageClient('vscode-xowl-languages', 'xOWL Language Server', createServer, clientOptions);
+    let client = new LanguageClient('xowl-languages', 'xOWL Language Server', createServer, clientOptions);
     let disposable = client.start();
     context.subscriptions.push(disposable);
     return client;

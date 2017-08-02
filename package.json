@@ -1,5 +1,5 @@
 {
-    "name": "vscode-xowl-languages",
+    "name": "xowl-languages",
     "displayName": "Semantic Web Languages Support",
     "description": "Language support for the RDF, OWL, xRDF, xOWL, SPARQL and Denotation languages",
     "icon": "xowl.png",
