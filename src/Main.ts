@@ -57,7 +57,7 @@ function createLanguageClient(context: VSCode.ExtensionContext): LanguageClient 
         }, outputChannelName: "vscode-xowl-languages"
     };
     function createServer(): Promise<StreamInfo> {
-        return doCreateServer(context, client);
+        return serverLaunchProcess(context, client);
     }
     let client = new LanguageClient('vscode-xowl-languages', 'xOWL Language Server', createServer, clientOptions);
     let disposable = client.start();
@@ -66,13 +66,14 @@ function createLanguageClient(context: VSCode.ExtensionContext): LanguageClient 
 }
 
 /**
- * Do creates the language server
+ * Spawns a new LSP server and connect to it through the standard streams
  * @param context The current context
  * @param client  The language client
  * @return The promise for a StreamInfo
  */
-function doCreateServer(context: VSCode.ExtensionContext, client: LanguageClient): Promise<StreamInfo> {
+function serverLaunchProcess(context: VSCode.ExtensionContext, client: LanguageClient): Promise<StreamInfo> {
     return new Promise((resolve, reject) => {
+        client.outputChannel.appendLine("[INFO] Creating a new xOWL language server with a new process ...");
         let java = resolveJava();
         if (java == null) {
             reject("[ERROR] Failed to find Java executable");
@@ -80,12 +81,18 @@ function doCreateServer(context: VSCode.ExtensionContext, client: LanguageClient
         }
         resolveJavaGetVersion(java).then(version => {
             client.outputChannel.appendLine("[INFO] Will use Java: " + java + " (version " + version + ")");
-            serverLaunchProcess(context, java, client.outputChannel).then(stream => {
-                resolve(stream);
-            }, message => {
-                reject(message);
-            }).catch(error => {
-                reject("[ERROR] " + error);
+            let jarPath = Path.resolve(context.extensionPath, "target", "server.jar");
+            let options = { cwd: VSCode.workspace.rootPath };
+            client.outputChannel.appendLine("[INFO] Launching server as " + java + " -jar " + jarPath);
+            let process = ChildProcess.spawn(java, ["-jar", jarPath], options);
+            if (process == null) {
+                reject("[ERROR] Failed to launch the server");
+                return;
+            }
+            client.outputChannel.appendLine("[INFO] Launched server as process " + process.pid);
+            resolve({
+                writer: process.stdin,
+                reader: process.stdout
             });
         }, message => {
             reject(message);
@@ -96,35 +103,20 @@ function doCreateServer(context: VSCode.ExtensionContext, client: LanguageClient
 }
 
 /**
- * Creates a new LSP server
+ * Connects to a running language server on the specified port
  * @param context The current context
- * @param java    The java executable use use
- * @param channel The channel to use for output
+ * @param client  The language client
+ * @param port The port to connect to
  * @return The stream to communicate with the server
  */
-function serverLaunchProcess(context: VSCode.ExtensionContext, java: string, channel: VSCode.OutputChannel): Promise<StreamInfo> {
+function serverConnect(context: VSCode.ExtensionContext, client: LanguageClient, port: number): Promise<StreamInfo> {
     return new Promise((resolve, reject) => {
-        let jarPath = Path.resolve(context.extensionPath, "target", "server.jar");
-        let options = { cwd: VSCode.workspace.rootPath };
-        channel.appendLine("[INFO] Launching server as " + java + " -jar " + jarPath);
-        let process = ChildProcess.spawn(java, ["-jar", jarPath], options);
-        if (process == null) {
-            reject("[ERROR] Failed to launch the server");
-            return;
-        }
-        channel.appendLine("[INFO] Launched server as process " + process.pid);
-        serverAttachStream(process.stdout, channel);
-        serverAttachStream(process.stderr, channel);
-        try {
-            let socket = Net.connect(8000, "localhost", () => {
-                resolve({
-                    writer: socket,
-                    reader: socket
-                });
-            });
-        } catch (exception) {
-            reject("[ERROR] " + exception);
-        }
+        client.outputChannel.appendLine("[INFO] Connecting to xOWL language server on port " + port + " ...");
+        let socket = Net.connect(port);
+        resolve({
+            writer: socket,
+            reader: socket
+        });
     });
 }
 
