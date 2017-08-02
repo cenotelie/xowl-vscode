@@ -22,32 +22,20 @@ import * as OS from "os";
 import * as Path from "path";
 import * as FS from "fs";
 import * as ChildProcess from "child_process";
+import { Readable } from 'stream';
 import * as Net from "net";
 import { LanguageClient, LanguageClientOptions, StreamInfo } from "vscode-languageclient";
 
 export function activate(context: VSCode.ExtensionContext): void {
-    let java = resolveJava();
-    if (java == null) {
-        console.error("vscode-xowl-languages: Failed to find Java executable");
-        return;
-    }
-    resolveJavaGetVersion(java).then(version => {
-        onJavaAvailable(context, java, version);
-    }, message => {
-        console.error(message);
-    }).catch(error => {
-        console.error(error);
-    });
+    createLanguageClient(context);
 }
 
 /**
- * Continues the initialization for this extension when java is available
- * @param context The current context
- * @param java    The path to the Java executable
- * @param version The Java version
+ * Creates a new language client for this extension
+ * @param context  The extension's content
+ * @return The language client
  */
-function onJavaAvailable(context: VSCode.ExtensionContext, java: string, version: string): void {
-    console.info("vscode-xowl-languages: Will use Java: " + java + " (version " + version + ")");
+function createLanguageClient(context: VSCode.ExtensionContext): LanguageClient {
     let clientOptions: LanguageClientOptions = {
         documentSelector: ["rdf-nt", "rdf-nq", "rdf-ttl", "rdf-trig", "rdf-xml", "xrdf", "owl-fs", "owl-xml", "xowl", "sparql"],
         synchronize: {
@@ -66,45 +54,87 @@ function onJavaAvailable(context: VSCode.ExtensionContext, java: string, version
                 VSCode.workspace.createFileSystemWatcher("**/*.sparql"),
                 VSCode.workspace.createFileSystemWatcher("**/*.denotation")
             ]
-        }
+        }, outputChannelName: "vscode-xowl-languages"
     };
     function createServer(): Promise<StreamInfo> {
-        return serverLaunchProcess(context, java);
+        return doCreateServer(context, client);
     }
     let client = new LanguageClient('vscode-xowl-languages', 'xOWL Language Server', createServer, clientOptions);
     let disposable = client.start();
     context.subscriptions.push(disposable);
+    return client;
+}
+
+/**
+ * Do creates the language server
+ * @param context The current context
+ * @param client  The language client
+ * @return The promise for a StreamInfo
+ */
+function doCreateServer(context: VSCode.ExtensionContext, client: LanguageClient): Promise<StreamInfo> {
+    return new Promise((resolve, reject) => {
+        let java = resolveJava();
+        if (java == null) {
+            reject("[ERROR] Failed to find Java executable");
+            return;
+        }
+        resolveJavaGetVersion(java).then(version => {
+            client.outputChannel.appendLine("[INFO] Will use Java: " + java + " (version " + version + ")");
+            let streamInfo = serverLaunchProcess(context, java, client.outputChannel);
+            if (streamInfo == null) {
+                reject("No stream to server");
+                return;
+            }
+            resolve(streamInfo);
+        }, message => {
+            reject("[ERROR] " + message);
+        }).catch(error => {
+            reject(error);
+        });
+    });
 }
 
 /**
  * Creates a new LSP server
  * @param context The current context
  * @param java    The java executable use use
- * @return A promise for I/O streams
+ * @param channel The channel to use for output
+ * @return The stream to communicate with the server
  */
-function serverLaunchProcess(context: VSCode.ExtensionContext, java: string): Promise<StreamInfo> {
+function serverLaunchProcess(context: VSCode.ExtensionContext, java: string, channel: VSCode.OutputChannel): StreamInfo {
     let jarPath = Path.resolve(context.extensionPath, "target", "server.jar");
     let options = { cwd: VSCode.workspace.rootPath };
+    channel.appendLine("[INFO] Launching server as " + java + " -jar " + jarPath);
     let process = ChildProcess.spawn(java, ["-jar", jarPath], options);
-    console.info("vscode-xowl-languages: Launched server as process " + process.pid);
-    return serverConnect(8000);
+    if (process == null) {
+        channel.appendLine("[ERROR] Failed to launch the server");
+        return null;
+    }
+    channel.appendLine("[INFO] Launched server as process " + process.pid);
+    serverAttachStream(process.stdout, channel);
+    serverAttachStream(process.stderr, channel);
+    let socket = Net.connect(8000);
+    if (socket == null) {
+        channel.appendLine("[ERROR] Failed to connect to the server. Is the process launched?");
+        return null;
+    }
+    return {
+        writer: socket,
+        reader: socket
+    };
 }
 
 /**
- * Connects to a running server
- * @param port The port on the server
- * @return A promise for I/O streams
+ * Attach a process stream to a channel
+ * @param readable      The process stream
+ * @param outputChannel The channel
  */
-function serverConnect(port: number): Promise<StreamInfo> {
-    return new Promise((resolve, reject) => {
-        let socket = Net.connect(port);
-        resolve({
-            writer: socket,
-            reader: socket
-        });
+function serverAttachStream(readable: Readable, channel: VSCode.OutputChannel): void {
+    readable.on('data', chunk => {
+        const chunkAsString = typeof chunk === 'string' ? chunk : chunk.toString();
+        channel.append(chunkAsString);
     });
 }
-
 
 export function deactivate(): void {
 }
@@ -158,16 +188,16 @@ function resolveJavaGetVersion(execName: string): Promise<string> {
                 reject(error);
             let lines = stderr.split(OS.EOL);
             if (lines.length == 0) {
-                reject("vscode-xowl-languages: Failed to determine version of " + execName);
+                reject("[ERROR] Failed to determine version of " + execName);
                 return;
             }
             let matches = lines[0].match("version \"([^\"]+)\"");
             if (matches == null) {
-                reject("vscode-xowl-languages: Failed to determine version of " + execName);
+                reject("[ERROR] Failed to determine version of " + execName);
                 return;
             }
             if (matches.length < 2) {
-                reject("vscode-xowl-languages: Failed to determine version of " + execName);
+                reject("[ERROR] Failed to determine version of " + execName);
                 return;
             }
             resolve(matches[1]);
