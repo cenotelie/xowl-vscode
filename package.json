@@ -5,6 +5,7 @@
     "icon": "xowl.png",
     "version": "0.1.0",
     "commit": "",
+    "author": "Assocation Cénotélie",
     "publisher": "cenotelie",
     "repository": {
         "type": "mercurial",
