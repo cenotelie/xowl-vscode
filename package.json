@@ -44,6 +44,15 @@
     "main": "./target/src/Main",
     "files": [],
     "contributes": {
+        "configuration": {
+            "title": "Semantic Web Languages Support",
+            "properties": {
+                "java.home": {
+                    "type": "string",
+                    "description": "Path to the home of a local Java installation"
+                }
+            }
+        },
         "languages": [
             {
                 "id": "rdf-nt",
