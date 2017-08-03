@@ -57,6 +57,13 @@ function createLanguageClient(context: VSCode.ExtensionContext): LanguageClient 
         }, outputChannelName: "xowl-languages"
     };
     function createServer(): Promise<StreamInfo> {
+        let serverType = VSCode.workspace.getConfiguration("xowl").get("lsp.server");
+        if (serverType == "remote") {
+            let port = VSCode.workspace.getConfiguration("xowl").get("lsp.server.port") as number;
+            if (port == null)
+                port = 8000;
+            return serverConnect(context, client, port);
+        }
         return serverLaunchProcess(context, client);
     }
     let client = new LanguageClient('xowl-languages', 'xOWL Language Server', createServer, clientOptions);
@@ -144,7 +151,7 @@ function resolveJava(): string {
     let execName = (process.platform === "win32" ? "java.exe" : "java");
 
     // is the java.home setting defined?
-    let settingJavaHome = VSCode.workspace.getConfiguration("java").get("home") as string;
+    let settingJavaHome = VSCode.workspace.getConfiguration("xowl").get("java") as string;
     if (settingJavaHome != null) {
         let result = resolveJavaInDirectory(settingJavaHome, execName);
         if (result != null)

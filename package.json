@@ -47,9 +47,20 @@
         "configuration": {
             "title": "Semantic Web Languages Support",
             "properties": {
-                "java.home": {
+                "xowl.java": {
                     "type": "string",
                     "description": "Path to the home of a local Java installation"
+                },
+                "xowl.lsp.server": {
+                    "type": "string",
+                    "description": "The specification of the language server to use, either 'integrated', or 'remote'",
+                    "default": "integrated",
+                    "pattern": "^(integrated|remote)$"
+                },
+                "xowl.lsp.server.port": {
+                    "type": "integer",
+                    "description": "The to connect to for a remote language server",
+                    "default": 8000
                 }
             }
         },
