@@ -48,4 +48,6 @@ This extension looks for a local installation a Java using (in this order):
 
 ## License
 
-GNU LESSER GENERAL PUBLIC LICENSE Version 3
+The source code to this extension is the property of the [Association Cénotélie](https://cenotelie.fr). It is available in [xowl-vscode](https://bitbucket.org/xowl/xowl-vscode) and licensed under the GNU Lesser General Public License Version 3.
+
+This extension embeds a compiled version of the language server. The source code to the language server is available on [xowl-infra](https://bitbucket.org/xowl/xowl-infra) and licensed under the GNU Lesser General Public License Version 3 by the [Association Cénotélie](https://cenotelie.fr).
