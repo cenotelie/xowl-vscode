@@ -9,12 +9,12 @@
     "publisher": "cenotelie",
     "repository": {
         "type": "mercurial",
-        "url": "https://bitbucket.org/xowl/xowl-vscode"
+        "url": "https://bitbucket.org/cenotelie/xowl-vscode"
     },
     "license": "LGPL-3.0+",
-    "homepage": "https://bitbucket.org/xowl/xowl/vs-code",
+    "homepage": "https://bitbucket.org/cenotelie/xowl-vscode",
     "bugs": {
-        "url": "https://bitbucket.org/xowl/xowl/vs-code/issues",
+        "url": "https://bitbucket.org/cenotelie/xowl-vscode/issues",
         "email": "contact@cenotelie.fr"
     },
     "engines": {
